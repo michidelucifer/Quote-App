@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { quoteReducers } from './quoteReducers';
+import quoteReducers from './quoteReducers';
 
 const rootReducer = combineReducers({
     quoteReducers

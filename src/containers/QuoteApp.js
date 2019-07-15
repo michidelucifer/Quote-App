@@ -1,29 +1,30 @@
-import { Component } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreator } from 'redux';
+import { bindActionCreators } from 'redux';
 import * as QuoteActions from '../actions/QuoteActions';
-import { Presentational } from '../components/presentational';
+import Presentational from '../components/presentational';
 
 class QuoteApp extends Component {
     render() {
+        const { list, actions } = this.props;
         return(
             <div>
-                <Presentational />
+                <Presentational list={list} actions={actions} />
             </div>
         );
     }
 }
 
 function mapStateToProps(state) {
+    // console.log(state);
     return {
-        index: state.index,
-        quotes: state.quotes
+        list: state.quoteReducers
     };
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        actions: bindActionCreator(QuoteActions, dispatch)
+        actions: bindActionCreators(QuoteActions, dispatch)
     };
 }
 

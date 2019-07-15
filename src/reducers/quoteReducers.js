@@ -1,6 +1,6 @@
-import { NEW_QUOTE, CHANGE_QUOTE } from "../constants/ActionTypes";
+import { CHANGE_QUOTE } from "../constants/ActionTypes";
 
-const initialState = {
+let initialState = {
     quotes: [
         {
             quote: `Don't cry because it's over, smile because it happened.`,
@@ -23,24 +23,25 @@ const initialState = {
             author: "Bernard M. Baruch"
         }
     ],
-    index: getRandomIndex(this.index)
+    index: 0
 }
 
-const getRandomIndex = (current_index) => {
+function getRandomIndex(current_index) {
     let new_index;
     do {
         new_index = Math.floor(Math.random() * initialState.quotes.length);
-    } while (new_index !== current_index);
+    } while (new_index === current_index);
     return new_index;
 }
 
 export default function quoteReducers(state = initialState, action) {
     switch(action.type) {
         case CHANGE_QUOTE:
-            return {
-                index: getRandomIndex(),
-                ...state
+            const new_ret = {
+                ...state,
+                index: getRandomIndex(state.index)
             }
+            return new_ret;
         default:
             return state;
     }
